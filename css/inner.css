@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Ichki sahifalar — breadcrumbs, kafolat bloki, checklist, bog'liq xizmatlar
+   TZ bo'limi: 5.1, 5.2
+   ========================================================================== */
+
+/* --- Breadcrumbs --- */
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+  padding-block: var(--space-4);
+}
+
+.breadcrumbs a {
+  color: var(--color-text-secondary);
+}
+
+.breadcrumbs a:hover {
+  color: var(--color-primary-text);
+}
+
+.breadcrumbs__sep {
+  color: var(--color-border);
+}
+
+.breadcrumbs [aria-current="page"] {
+  color: var(--color-text-primary);
+  font-weight: var(--fw-semibold);
+}
+
+/* --- Premium "tech" sarlavha bloki (xizmat va kategoriya sahifalari) ---
+   Bosh sahifadagi hero fonini ichki sahifalarga ham olib boradi ("IT
+   infratuzilma" dizayn yo'nalishi davomi) — JS animatsiyasiz, statik
+   holda (30+ sahifada performance uchun). :has() orqali struktura bo'yicha
+   avtomatik aniqlanadi, HTML fayllariga qo'l tekkizilmaydi. Safari <15.4
+   :has()ni tushunmasa, sahifa oddiy (avvalgi) ko'rinishda qoladi —
+   progressive enhancement, sinish yo'q. */
+.section:has(> .container > .service-hero),
+.section:has(> .container > h1 + .seo-text) {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-ink);
+  background-image:
+    var(--gradient-mesh),
+    linear-gradient(180deg, var(--color-ink) 0%, var(--color-ink-soft) 100%);
+  color: var(--color-text-inverse);
+}
+
+.section:has(> .container > .service-hero)::before,
+.section:has(> .container > h1 + .seo-text)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cpath d='M0 .5H56M.5 0V56' stroke='%23FFFFFF' stroke-opacity='0.06'/%3E%3C/svg%3E");
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  pointer-events: none;
+}
+
+.section:has(> .container > .service-hero) > .container,
+.section:has(> .container > h1 + .seo-text) > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.section:has(> .container > .service-hero) h1,
+.section:has(> .container > h1 + .seo-text) h1 {
+  color: var(--color-text-inverse);
+}
+
+.section:has(> .container > .service-hero) .service-hero p.text-secondary {
+  color: var(--color-ink-text-secondary);
+}
+
+.section:has(> .container > .service-hero) .service-hero__price {
+  color: var(--color-primary-light);
+}
+
+.section:has(> .container > .service-hero) .service-hero__actions .btn--secondary {
+  border-color: var(--color-glass-border);
+  color: var(--color-primary-light);
+}
+
+.section:has(> .container > .service-hero) .service-hero__actions .btn--secondary:hover {
+  background-color: var(--color-glass-fill);
+  border-color: var(--color-primary-light);
+}
+
+.section:has(> .container > h1 + .seo-text) .seo-text {
+  color: var(--color-ink-text-secondary);
+}
+
+.section:has(> .container > .service-hero) .service-hero .inline-form {
+  box-shadow: var(--shadow-elevated);
+  border: none;
+}
+
+/* --- Xizmat sahifasi: sarlavha bloki --- */
+.service-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (min-width: 992px) {
+  .service-hero {
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+  }
+}
+
+.service-hero__price {
+  display: inline-block;
+  font-size: var(--fs-h3-mobile);
+  font-weight: var(--fw-bold);
+  color: var(--color-primary-text);
+  margin-block: var(--space-4);
+}
+
+.service-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* --- Checklist (nima ta'mirlaymiz) --- */
+.checklist {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .checklist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-card);
+}
+
+.checklist__icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.checklist__item--interactive {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.checklist__item--interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* --- Kafolat bloki --- */
+.guarantee {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+}
+
+.guarantee__icon {
+  font-size: 40px;
+  flex-shrink: 0;
+}
+
+/* --- SEO matn bloki --- */
+.seo-text {
+  max-width: 800px;
+  color: var(--color-text-secondary);
+}
+
+.seo-text p {
+  margin-bottom: var(--space-4);
+}
+
+/* --- Bog'liq xizmatlar --- */
+.related-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.related-services a {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  font-size: var(--fs-small);
+}
+
+.related-services a:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary-text);
+}
+
+/* --- Sahifa ichidagi ariza formasi (inline, modalsiz) --- */
+.inline-form {
+  max-width: 480px;
+}
+
+.inline-form h2 {
+  margin-bottom: var(--space-4);
+}

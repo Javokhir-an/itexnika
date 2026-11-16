@@ -1,0 +1,318 @@
+/* ==========================================================================
+   Komponentlar — tugmalar, inputlar, kartochkalar (TZ 7.5)
+   ========================================================================== */
+
+/* --- Qidiruv natijalari (TZ 4.2, 6.2) --- */
+.site-header.is-search-open .site-header__search {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-width: none;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-bg-primary);
+  border-top: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+.search-results {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: max-content;
+  min-width: 100%;
+  max-width: min(360px, 90vw);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card-hover);
+  max-height: 340px;
+  overflow-y: auto;
+  z-index: var(--z-header);
+}
+
+.site-header.is-search-open .search-results {
+  left: var(--space-4);
+  right: var(--space-4);
+  width: auto;
+  max-width: none;
+}
+
+.search-results.is-open {
+  display: block;
+}
+
+.search-results a {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-primary);
+  font-size: var(--fs-small);
+}
+
+.search-results a:hover,
+.search-results a.is-active {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-primary-text);
+}
+
+.search-results__empty {
+  padding: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+}
+
+.search-results__empty a {
+  color: var(--color-primary-text);
+  font-weight: var(--fw-semibold);
+}
+
+/* --- Shahar tanlash ro'yxati (TZ 6.3) --- */
+.city-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.city-list__item {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  text-align: left;
+  font-weight: var(--fw-semibold);
+}
+
+.city-list__item:hover,
+.city-list__item.is-active {
+  border-color: var(--color-primary);
+  color: var(--color-primary-text);
+  background-color: var(--color-bg-secondary);
+}
+
+/* --- Tugmalar --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-button);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-body);
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--gradient-primary);
+  color: var(--color-text-inverse);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.18) inset, 0 6px 16px -6px rgba(23, 184, 127, 0.55);
+}
+
+.btn--primary:hover {
+  background: var(--gradient-primary-hover);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.18) inset, 0 10px 24px -6px rgba(23, 184, 127, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn--secondary {
+  background-color: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary-text);
+}
+
+.btn--secondary:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn--text {
+  color: var(--color-primary-text);
+  min-height: auto;
+  padding: 0;
+  font-weight: var(--fw-semibold);
+}
+
+.btn--text::after {
+  content: '→';
+  margin-left: var(--space-1);
+  transition: transform 0.2s ease;
+}
+
+.btn--text:hover::after {
+  transform: translateX(4px);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* --- Kartochka --- */
+.card {
+  position: relative;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card--interactive {
+  cursor: pointer;
+}
+
+.card--interactive:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+  border-color: rgba(23, 184, 127, 0.35);
+}
+
+/* --- Shisha (glass) kartochka — quyuq/"tech" fon ustida ishlatiladi --- */
+.card--glass {
+  background-color: var(--color-glass-fill);
+  border-color: var(--color-glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--color-text-inverse);
+}
+
+/* --- Forma elementlari --- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.field__label {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+}
+
+.field__input {
+  min-height: 44px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  background-color: var(--color-bg-primary);
+}
+
+.field__input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field__input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(23, 184, 127, 0.14);
+  outline: none;
+}
+
+.field__error {
+  font-size: var(--fs-small);
+  color: var(--color-error);
+  display: none;
+}
+
+.field--invalid .field__input {
+  border-color: var(--color-error);
+}
+
+.field--invalid .field__checkbox-row input[type="checkbox"] {
+  outline: 2px solid var(--color-error);
+  outline-offset: 2px;
+}
+
+.field--invalid .field__error {
+  display: block;
+}
+
+.field__checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+/* --- Badge (masalan aksiya belgisi) --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  background: linear-gradient(135deg, #FF7A00 0%, #FF9736 100%);
+  color: var(--color-text-inverse);
+  box-shadow: 0 4px 12px -4px rgba(255, 122, 0, 0.55);
+}
+
+/* --- Status-indikator ("● Faol") — monitoring/uptime hissi uchun --- */
+.status-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  flex-shrink: 0;
+}
+
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  opacity: 0.5;
+  animation: status-pulse 2.2s ease-out infinite;
+}
+
+@keyframes status-pulse {
+  0% { transform: scale(0.6); opacity: 0.55; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* --- Modal --- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.modal.is-open {
+  display: flex;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(26, 26, 26, 0.5);
+}
+
+.modal__panel {
+  position: relative;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-card);
+  padding: var(--space-8);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-elevated);
+}
+
+.modal__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  font-size: 24px;
+  line-height: 1;
+}
